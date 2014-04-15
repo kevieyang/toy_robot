@@ -2,11 +2,10 @@
 
 class Position
 
-  def initialize(x, y, f)
+  def initialize(x, y)
     @x = x
 	@y = y
-	@facing = f
   end
   
-  attr_reader :x, :y, :facing
+  attr_reader :x, :y
 end
