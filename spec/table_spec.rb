@@ -11,31 +11,33 @@ describe Table do
 	table.class.should eql(Table)
   end
 
-  it "has a width" do
+  it "has a set width" do
     table = Table.new(5,5)
     table.width.should == 5
   end
 
-  it "has a length" do
+  it "has a set length" do
     table = Table.new(5,5)
     table.width.should == 5
   end
 
-  it "checks if a valid position" do
+  it "validates (0,3)" do
     table = Table.new(5,5)
-	table.validate_position(Position.new(0,0)).should == true
-	table.validate_position(Position.new(0,5)).should == true
-	table.validate_position(Position.new(5,2)).should == true
 	table.validate_position(Position.new(0,3)).should == true
+  end
+
+  it "validates (4,4)" do
+    table = Table.new(5,5)
 	table.validate_position(Position.new(4,4)).should == true
   end
   
-  it "checks if an invalid position" do
+  it "invalidates (-1,3)" do
     table = Table.new(5,5)
-	table.validate_position(Position.new(6,6)).should == false
-	table.validate_position(Position.new(6,0)).should == false
-	table.validate_position(Position.new(1,6)).should == false
 	table.validate_position(Position.new(-1,3)).should == false
+  end
+  
+  it "invalidates (2,-2)" do
+    table = Table.new(5,5)
 	table.validate_position(Position.new(2,-2)).should == false
   end
 end
