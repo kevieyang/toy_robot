@@ -1,43 +1,34 @@
 #!/usr/bin/ruby
 require 'rubygems'
 require 'rspec'
-require '../table.rb'
-require '../position.rb'
+require '../lib/table.rb'
+require '../lib/position.rb'
 
 describe Table do
 
   it "creates table" do
     table = Table.new(5,5)
-	table.class.should eql(Table)
+	table.class.should equal(Table)
   end
 
-  it "has a set width" do
-    table = Table.new(5,5)
-    table.width.should == 5
+  it "has a set size x" do
+    table = Table.new(1,2)
+    table.size_x.should == 1
   end
 
-  it "has a set length" do
-    table = Table.new(5,5)
-    table.width.should == 5
+  it "has a set size y" do
+    table = Table.new(1,2)
+    table.size_y.should == 2
   end
 
-  it "validates (0,3)" do
+  it "correctly identifies a valid position " do
     table = Table.new(5,5)
-	table.validate_position(Position.new(0,3)).should == true
-  end
-
-  it "validates (4,4)" do
-    table = Table.new(5,5)
-	table.validate_position(Position.new(4,4)).should == true
+	table.validate_position(Position.new(0,2)).should == true
   end
   
-  it "invalidates (-1,3)" do
+  it "correctly identifies an invalid table position" do
     table = Table.new(5,5)
-	table.validate_position(Position.new(-1,3)).should == false
+	table.validate_position(Position.new(6,6)).should == false
   end
   
-  it "invalidates (2,-2)" do
-    table = Table.new(5,5)
-	table.validate_position(Position.new(2,-2)).should == false
-  end
 end

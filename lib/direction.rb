@@ -6,8 +6,8 @@ class Direction
   LEFT = -1
   RIGHT = 1
 
-  def initialize(facing)
-	@facing = facing
+  def initialize(facing = nil)
+	@facing = facing unless (DIRECTIONS.index(facing).nil? || facing == nil)
   end
   
   def left
@@ -18,13 +18,17 @@ class Direction
 	turn(RIGHT)
   end
   
-  attr_reader :facing
+  def validate(facing)
+    !DIRECTIONS.index(facing).nil?
+  end
+  
+  attr_accessor :facing
+  attr_reader :DIRECTIONS
   
   private
   
   def turn(side)
   	@facing = DIRECTIONS[(DIRECTIONS.index(@facing) + side) % DIRECTIONS.length]
-	
   end
   
 end

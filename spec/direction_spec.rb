@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 require 'rubygems'
 require 'rspec'
-require '../direction.rb'
+require '../lib/direction.rb'
 
 describe Direction do
   it "returns the current direction" do
@@ -57,4 +57,18 @@ describe Direction do
 	dir.facing.should == "NORTH"
   end
   
+  it "does not accept an invalid direction" do
+    dir = Direction.new("SOUTH-WEST")
+	dir.facing.should be_nil
+  end
+  
+  it "validates a valid direction" do
+    dir = Direction.new("WEST")
+	dir.validate("NORTH").should == true	
+  end
+  
+  it "invalidates an invalid direction" do
+    dir = Direction.new("WEST")
+	dir.validate("HELLO WORLD").should == false
+  end
 end
