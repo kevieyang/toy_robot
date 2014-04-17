@@ -14,6 +14,8 @@ class RobotController
 	@robot_placed = false
   end
   
+  attr_reader :robot, :robot_placed
+  
   def help
     puts
     puts "---------------------------------------- Commands List ----------------------------------------"
@@ -43,14 +45,14 @@ class RobotController
       help
     when "EXIT", "QUIT"
       exit
-	when nil, "" #ignore empty inputs
+	#ignore every other input
     else
-      puts "Invalid command. Type ""HELP"" for list of valid commands"
-      puts
+	  #p command
+      #puts "Invalid command. Type ""HELP"" for list of valid commands"
+      #puts
     end
   end
   
-  #TODO: Read file
   def read_file(filename)
     if File.exists?(filename)
 	  input_file = File.open(filename, 'r')
@@ -61,7 +63,18 @@ class RobotController
 	else
 	  puts "File '#{filename}' was not found"
 	end
-	
+  end
+  
+  def console_input(input = "")
+    while (input != "QUIT")
+      print "Enter command (HELP for list):> "
+      input = $stdin.gets.chomp
+	  issue_command(input.upcase!)
+	  if (!@robot_placed && !["MOVE", "LEFT", "RIGHT", "REPORT"].index(input).nil?)
+	    puts "Please place the robot before issuing any other commands"
+	    puts
+	  end
+	end
   end
   
   def main
@@ -70,16 +83,7 @@ class RobotController
        read_file(ARGV[0])
 	#user console input
 	else
-	  input = ""
-      while (input != "QUIT")
-        print "Enter command:> "
-        input = $stdin.gets.chomp
-	    issue_command(input.upcase!)
-	    if (!@robot_placed && !["MOVE", "LEFT", "RIGHT", "REPORT"].index(input).nil?)
-	      puts "Please place the robot before issuing any other commands"
-		  puts
-	    end
-	  end
+       console_input
     end
   end
 end
