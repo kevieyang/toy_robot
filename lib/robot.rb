@@ -22,15 +22,17 @@ class Robot
   end
   
   def move
+    current_x = @position.x
+	current_y = @position.y
     case @direction.facing
 	when "NORTH"
-	  @position.y += 1 if @position.y.between?(0, @table.size_y - 1)
+	  @position.place(current_x, current_y + 1) if @position.y.between?(0, @table.size_y - 1)
 	when "EAST"
-	  @position.x += 1 if @position.x.between?(0, @table.size_x - 1)
+	  @position.place(current_x + 1, current_y) if @position.x.between?(0, @table.size_x - 1)
 	when "SOUTH"
-	  @position.y -= 1 if @position.y.between?(1, @table.size_y)
+	  @position.place(current_x, current_y - 1) if @position.y.between?(1, @table.size_y)
 	when "WEST"
-	  @position.x -= 1 if @position.x.between?(1, @table.size_x)
+	  @position.place(current_x - 1, current_y) if @position.x.between?(1, @table.size_x)
 	else
 	  puts "Invalid direction faced. Please re-place toy robot"
 	end

@@ -11,5 +11,5 @@ class Position
 	@y = y
   end
   
-  attr_accessor :x, :y
+  attr_reader :x, :y
 end

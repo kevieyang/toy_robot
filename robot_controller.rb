@@ -45,11 +45,6 @@ class RobotController
       help
     when "EXIT", "QUIT"
       exit
-	#ignore every other input
-    else
-	  #p command
-      #puts "Invalid command. Type ""HELP"" for list of valid commands"
-      #puts
     end
   end
   
