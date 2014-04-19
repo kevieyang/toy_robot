@@ -1,0 +1,21 @@
+Running the program in console mode
+------------------------------------
+To run the program, execute the robot_controller.rb file
+
+> ruby robot_controller.rb
+
+A prompt for user input will be displayed. To quit the application, type 'QUIT' or 'EXIT'.
+
+
+Running the program in file input mode
+--------------------------------------
+To have the robot_controller load an input file, include it as a command line argument.
+
+> ruby robot_controller.rb data/input.txt
+
+
+Running the tests
+---------------------------------------
+In the spec directory, you may execute the test scripts by typing
+
+> rspec robot_controller_spec.rb
